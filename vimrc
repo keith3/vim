@@ -87,3 +87,5 @@ let NERDTreeWinPos="right"
 let NERDTreeShowBookmarks=1
 "<F2>调出/隐藏NERDTree
 map <F2> :NERDTreeToggle<CR>
+"关闭vim时,如果打开的文件只有NERDTree,NERDTree会自动关闭，减少多次按:q
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
