@@ -89,3 +89,9 @@ let NERDTreeShowBookmarks=1
 map <F2> :NERDTreeToggle<CR>
 "关闭vim时,如果打开的文件只有NERDTree,NERDTree会自动关闭，减少多次按:q
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+
+"设置语言防止中文乱码
+set fileencodings=utf-8
+set termencoding=utf-8
+set encoding=utf-8
+
