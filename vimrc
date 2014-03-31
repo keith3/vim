@@ -63,6 +63,7 @@ if filereadable("/etc/vim/vimrc.local")
 endif
 
 " vim plugins manager
+" install [pathogen](https://github.com/tpope/vim-pathogen)
 execute pathogen#infect()
  
 set modifiable
