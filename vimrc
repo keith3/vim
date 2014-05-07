@@ -83,6 +83,7 @@ filetype plugin on
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 "NERDTree-------------------------------------------------------
+" Install NERDTree: https://github.com/scrooloose/nerdtree
 "在屏幕右侧显示目录树
 let NERDTreeWinPos="right"
 "默认显示书签
