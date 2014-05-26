@@ -1,6 +1,5 @@
 vim
 ===
 
-Vim basic conf for **php&python** programer.
+Vim basic conf for **php** programer.
 
-You need install NerdTree first to make the shortcut 'F2' work.
