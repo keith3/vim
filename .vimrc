@@ -13,7 +13,7 @@ runtime! debian.vim
 " Uncomment the next line to make Vim more Vi-compatible
 " NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
 " options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
+" set compatible
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
@@ -41,7 +41,7 @@ endif
 " differently from regular Vi. They are highly recommended though.
 set showcmd		" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
-"set ignorecase		" Do case insensitive matching
+set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 set autowrite		" Automatically save before commands like :next and :make
@@ -50,7 +50,7 @@ set mouse=a		" Enable mouse usage (all modes)
 
 "modified in 2013/9/25"
 set number
-"tab=4blank"
+"tab=4blank
 set cindent
 set autoindent
 set tabstop=4
@@ -84,13 +84,16 @@ map > >gv
 "设置php函数补全
 au FileType php call AddPHPFunction()
 function AddPHPFunction()
-    set dictionary-=~/.vim/php_function dictionary+=~/.vim/php_function
+    set dictionary-=~/.vim/dict/php_function dictionary+=~/.vim/dict/php_function
     set complete-=k complete+=k
 endfunction
 
 "phpcomplete
 filetype plugin on
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+
+" 设置nodejs函数补全
+au FileType javascript set dictionary+=~/.vim/dict/nodejs
 
 "NERDTree-------------------------------------------------------
 "在屏幕右侧显示目录树
@@ -115,9 +118,19 @@ let g:miniBufExplModSelTarget=1
 " js syntax highlighting
 au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 " enable js fold
-"let b:javascript_fold=1
+let b:javascript_fold=1
 " enable support js with html & css
-"let javascript_enable_domhtmlcss=1
+let javascript_enable_domhtmlcss=1
 
 "Ctags ---------------------------------------------------------
 set tags+=/home/keith/github/php-src
+
+" neocomplcache.vim 2014-08-16
+let g:neocomplcache_enable_at_startup = 1
+
+" map <silent><F3> :NEXTCOLOR<cr> 
+" map <silent><F4> :PREVCOLOR<cr> 
+
+"set t_Co=256
+colorscheme luckyboy
+

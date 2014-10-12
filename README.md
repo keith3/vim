@@ -1,5 +1,4 @@
 vim
 ===
 
-Vim basic conf for **php** programer.
-
+Basic vim conf, all plugin set in `.vim/bundel/`
