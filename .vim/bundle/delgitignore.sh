@@ -5,5 +5,5 @@ echo Deleting gitignore files...
 while read -r line
 do
     echo deleting $line ...
-    rm $line
-done < <(find ./ -name .gitignore)
+    rm -rf $line
+done < <(find ./ -name .git*)
