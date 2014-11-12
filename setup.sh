@@ -12,3 +12,4 @@ cp -r ./vim ~/.vim
 cp ./vimrc ~/.vimrc
 
 echo Done!
+echo Happy Coding!
