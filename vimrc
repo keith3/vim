@@ -10,6 +10,7 @@
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
+" echo '(>^.^<)'
 " Uncomment the next line to make Vim more Vi-compatible
 " NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
 " options, so any other options should be set AFTER setting 'compatible'.
@@ -73,10 +74,30 @@ set cursorline   " 十字高亮
 set cursorcolumn
 
 " shortcuts----------------------------------------------------
+" ctrl+d delete line in `INSERT` mode
+imap <c-d> <Esc>ddi
 " crtl+s quick save
-map ` :w<CR>
+inoremap <c-s> <Esc>:update<CR>a
+nnoremap <c-s> :update<CR>
+" quick quit vim with tapping `Esc` 3 times in a row
+nmap <Esc><Esc><Esc> :q<CR>
+" convert word to upper case in `INSERT` mode
+imap <c-u> <Esc>viwUea
+" convert word to lower case in `INSERT` mode
+imap <c-l> <Esc>viwuea
+" save and quit in `INSERT` mode
+imap ZZ <Esc>:wq<CR>
+" shift+enter 换行到下一行行首
+" inoremap ^M <CR><Esc>cc
 " auto add ()
-map <F4> a()<Esc>i
+imap <F4> ()<Esc>i
+" quick add shebang
+map # I#!/usr/bin/env <Esc>o<CR>
+" quick select word
+nmap <Space> viw
+" move line downward/upward 
+map _ o<Esc>kddp
+map + kdd
 " easier moving of code blocks
 map < <gv
 map > >gv
