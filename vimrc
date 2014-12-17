@@ -92,7 +92,7 @@ imap ZZ <Esc>:wq<CR>
 " auto add ()
 imap <F4> ()<Esc>i
 " quick add shebang
-map # I#!/usr/bin/env <Esc>o<CR>
+imap <C-Right> <Esc>I#!/usr/bin/env <Esc>o<CR>
 " quick select word
 nmap <Space> viw
 " move line downward/upward 
