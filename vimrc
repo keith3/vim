@@ -51,7 +51,7 @@ set mouse=a		" Enable mouse usage (all modes)
 
 "modified in 2013/9/25"
 set number
-"tab=4blank
+" tab=4blank
 set cindent
 set autoindent
 set tabstop=4
@@ -75,46 +75,61 @@ set cursorcolumn
 
 " shortcuts----------------------------------------------------
 " ctrl+d delete line in `INSERT` mode
-imap <c-d> <Esc>ddi
+inoremap <c-d> <Esc>ddi
 " crtl+s quick save
 inoremap <c-s> <Esc>:update<CR>a
 nnoremap <c-s> :update<CR>
 " quick quit vim with tapping `Esc` 3 times in a row
-nmap <Esc><Esc><Esc> :q<CR>
+nnoremap <Esc><Esc><Esc> :q<CR>
 " convert word to upper case in `INSERT` mode
-imap <c-u> <Esc>viwUea
+inoremap <c-u> <Esc>viwUea
 " convert word to lower case in `INSERT` mode
-imap <c-l> <Esc>viwuea
+inoremap <c-l> <Esc>viwuea
 " save and quit in `INSERT` mode
-imap ZZ <Esc>:wq<CR>
+inoremap ZZ <Esc>:wq<CR>
 " shift+enter 换行到下一行行首
 " inoremap ^M <CR><Esc>cc
-" auto add ()
-imap <F4> ()<Esc>i
+" auto complete () \"" '' [] {}
+inoremap ( ()<Esc>i
+inoremap " ""<Esc>i
+inoremap ' ''<Esc>i
+inoremap [ []<Esc>i
+inoremap { {}<Esc>i
+" map new key to quit insert mode
+inoremap jk <Esc>
+inoremap <Esc> <Nop>
 " quick add shebang
-imap <C-Right> <Esc>I#!/usr/bin/env <Esc>o<CR>
+inoremap <C-Right> <Esc>I#!/usr/bin/env <Esc>o<CR>
 " quick select word
-nmap <Space> viw
+nnoremap <Space> viw
 " move line downward/upward 
-map _ o<Esc>kddp
-map + kdd
+noremap _ o<Esc>kddp
+noremap + kdd
 " easier moving of code blocks
-map < <gv
-map > >gv
+noremap < <gv
+noremap > >gv
+
+nnoremap <leader>ev :vsplit $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
+iabbrev newpy #!/usr/bin/python<CR>#-*-encoding: utf-8-*-<CR>
 
 "设置php函数补全
-au FileType php call AddPHPFunction()
-function AddPHPFunction()
-    set dictionary-=~/.vim/dict/php_function dictionary+=~/.vim/dict/php_function
-    set complete-=k complete+=k
-endfunction
+" au FileType php call AddPHPFunction()
+" function AddPHPFunction()
+"     set dictionary-=~/.vim/dict/php_function dictionary+=~/.vim/dict/php_function
+"     set complete-=k complete+=k
+" endfunction
 
 "phpcomplete
-filetype plugin on
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+" filetype plugin on
+" autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 
 " 设置nodejs函数补全
 au FileType javascript set dictionary+=~/.vim/dict/nodejs
+autocmd FileType javascript set tabstop=4
+autocmd FileType javascript set softtabstop=4
+autocmd FileType javascript set shiftwidth=4
 
 "NERDTree-------------------------------------------------------
 "在屏幕右侧显示目录树
