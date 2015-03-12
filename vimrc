@@ -1,23 +1,10 @@
-" All system-wide defaults are set in $VIMRUNTIME/debian.vim (usually just
-" /usr/share/vim/vimcurrent/debian.vim) and sourced by the call to :runtime
-" you can find below.  If you wish to change any of those settings, you should
-" do it in this file (/etc/vim/vimrc), since debian.vim will be overwritten
-" everytime an upgrade of the vim packages is performed.  It is recommended to
-" make changes after sourcing debian.vim since it alters the value of the
-" 'compatible' option.
-
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
-" echo '(>^.^<)'
 " Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
 " set compatible
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
 if has("syntax")
   syntax on
 endif
@@ -46,127 +33,78 @@ set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 set autowrite		" Automatically save before commands like :next and :make
-"set hidden             " Hide buffers when they are abandoned
+set hidden		" Hide buffers when they are abandoned
 set mouse=a		" Enable mouse usage (all modes)
-
-"modified in 2013/9/25"
-set number
-" tab=4blank
-set cindent
-set autoindent
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set shiftround
-set expandtab
+set nu
+set shiftwidth=4	" 使用缩进的空格数
+set tabstop=4		" 一个Tab代表的空格数
+"set noexpandtab		" 在缩进时碰到Tab时用空格代替
+set cursorcolumn
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
-"install pathogen to manage vim plugins
-execute pathogen#infect()
- 
-set modifiable
-set ruler
-set cursorline   " 十字高亮
-set cursorcolumn
+" 2015-01-01 self define
+" Learn vim script the hard way
 
-" shortcuts----------------------------------------------------
-" ctrl+d delete line in `INSERT` mode
-inoremap <c-d> <Esc>ddi
-" crtl+s quick save
-inoremap <c-s> <Esc>:update<CR>a
-nnoremap <c-s> :update<CR>
-" quick quit vim with tapping `Esc` 3 times in a row
-nnoremap <Esc><Esc><Esc> :q<CR>
-" convert word to upper case in `INSERT` mode
-inoremap <c-u> <Esc>viwUea
-" convert word to lower case in `INSERT` mode
-inoremap <c-l> <Esc>viwuea
-" save and quit in `INSERT` mode
-inoremap ZZ <Esc>:wq<CR>
-" shift+enter 换行到下一行行首
-" inoremap ^M <CR><Esc>cc
-" auto complete () \"" '' [] {}
+" change the key of quit insert mode
+inoremap jk <Esc>
+inoremap <C-d> <Esc>ddO
+"noremap <C-s> <Esc>:w<CR>
+
+" open vimrc in current window
+nnoremap <Leader>ev <Esc>:vsplit $MYVIMRC<CR>
+nnoremap <Leader>sv <Esc>:source $MYVIMRC<CR>
+
+" () {} [] '' \"" 自动补全
 inoremap ( ()<Esc>i
-inoremap " ""<Esc>i
-inoremap ' ''<Esc>i
 inoremap [ []<Esc>i
 inoremap { {}<Esc>i
-" map new key to quit insert mode
-inoremap jk <Esc>
-inoremap <Esc> <Nop>
-" quick add shebang
-inoremap <C-Right> <Esc>I#!/usr/bin/env <Esc>o<CR>
-" quick select word
-nnoremap <Space> viw
-" move line downward/upward 
-noremap _ o<Esc>kddp
-noremap + kdd
-" easier moving of code blocks
-noremap < <gv
-noremap > >gv
+inoremap ' ''<Esc>i
+inoremap " ""<Esc>i
 
-nnoremap <leader>ev :vsplit $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
+" Python config
+augroup filetype_py
+    autocmd FileType python iabbrev newpy #!/usr/bin/python<CR># -*- encoding: utf-8 -*-<CR>
+augroup END
 
-iabbrev newpy #!/usr/bin/python<CR>#-*-encoding: utf-8-*-<CR>
+" javascript config
+augroup filetype_js
+	autocmd FileType javascript set shiftwidth=2
+augroup END
 
-"设置php函数补全
-" au FileType php call AddPHPFunction()
-" function AddPHPFunction()
-"     set dictionary-=~/.vim/dict/php_function dictionary+=~/.vim/dict/php_function
-"     set complete-=k complete+=k
-" endfunction
+" Status line
+set statusline=%f\ :)
 
-"phpcomplete
-" filetype plugin on
-" autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+" Color scheme
+colorscheme lufeng
+let g:rehash256=1
 
-" 设置nodejs函数补全
-au FileType javascript set dictionary+=~/.vim/dict/nodejs
-autocmd FileType javascript set tabstop=4
-autocmd FileType javascript set softtabstop=4
-autocmd FileType javascript set shiftwidth=4
+" install pathogen
+execute pathogen#infect()
 
-"NERDTree-------------------------------------------------------
-"在屏幕右侧显示目录树
+" **************************** NerdTree config *****************************
+" 在屏幕右侧显示目录树
 let NERDTreeWinPos="right"
 "默认显示书签
 let NERDTreeShowBookmarks=1
-"<F2>调出/隐藏NERDTree
 map <F2> :NERDTreeToggle<CR>
-"关闭vim时,如果打开的文件只有NERDTree,NERDTree会自动关闭，减少多次按:q
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") &&b:NERDTreeType == "primary") | q | endif
+" 退出vim时，如果NERDTree未关闭，自动关闭
+autocmd bufenter * if (winnr("$")==1 && exists("b:NERDTreeType") && b:NERDTreeType=="primary") | q | endif
 
-" miniBufExplore conf-------------------------------------------
-" <F7> move to pre tab, <F8> move to next tab
-map <F7> :bp<CR>
-map <F8> :bn<CR>
+" *************************** neocomplcache conf ***************************
+let g:neocomplcache_enable_at_startup=1
 
-let g:miniBufExplMapWindowNavVim=1
-let g:miniBufExplMapWindowNavArrows=1
-let g:miniBufExplMapCTabSwitchBufs=1
-let g:miniBufExplModSelTarget=1
+" "let currentChar=getchar(".")[col(".") - 1]
 
-" js syntax highlighting
-au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
-" enable js fold
-let b:javascript_fold=1
-" enable support js with html & css
-let javascript_enable_domhtmlcss=1
+"autocmd CursorMovedI * :echom getchar(".")[col(".") - 1]
+"inoremap <Enter> `c`
 
-"Ctags ---------------------------------------------------------
-set tags+=/home/keith/github/php-src
+" gtk+ syntax hilighting
+"let glib_enable_deprecated = 1
 
-" neocomplcache.vim 2014-08-16
-let g:neocomplcache_enable_at_startup = 1
-
-" map <silent><F3> :NEXTCOLOR<cr> 
-" map <silent><F4> :PREVCOLOR<cr> 
-
-"set t_Co=256
-colorscheme luckyboy
-
+" easier moving of code block
+noremap < <gv
+noremap > >gv
