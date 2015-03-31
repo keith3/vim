@@ -38,7 +38,7 @@ set mouse=a		" Enable mouse usage (all modes)
 set nu
 set shiftwidth=4	" 使用缩进的空格数
 set tabstop=4		" 一个Tab代表的空格数
-"set noexpandtab		" 在缩进时碰到Tab时用空格代替
+set expandtab		" 用空格代替Tab
 set cursorcolumn
 
 " Source a global configuration file if available
