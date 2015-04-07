@@ -36,10 +36,11 @@ set autowrite		" Automatically save before commands like :next and :make
 set hidden		" Hide buffers when they are abandoned
 set mouse=a		" Enable mouse usage (all modes)
 set nu
-set shiftwidth=4	" 使用缩进的空格数
-set tabstop=4		" 一个Tab代表的空格数
-"set noexpandtab		" 在缩进时碰到Tab时用空格代替
+set shiftwidth=2	" 使用缩进的空格数
+set tabstop=2		" 一个Tab代表的空格数
+set expandtab		" always uses spaces instead of tab characters
 set cursorcolumn
+set splitright
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
