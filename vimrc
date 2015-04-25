@@ -38,7 +38,7 @@ set mouse=a		" Enable mouse usage (all modes)
 set nu
 set shiftwidth=2	" 使用缩进的空格数
 set tabstop=2		" 一个Tab代表的空格数
-set expandtab		" always uses spaces instead of tab characters
+set expandtab		" 在缩进时碰到Tab时用空格代替
 set cursorcolumn
 set splitright
 
@@ -109,3 +109,7 @@ let g:neocomplcache_enable_at_startup=1
 " easier moving of code block
 noremap < <gv
 noremap > >gv
+
+" CtrlP plugin
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_map="<c-p>"
