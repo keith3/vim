@@ -36,8 +36,8 @@ set autowrite		" Automatically save before commands like :next and :make
 set hidden		" Hide buffers when they are abandoned
 set mouse=a		" Enable mouse usage (all modes)
 set nu
-set shiftwidth=2	" 使用缩进的空格数
-set tabstop=2		" 一个Tab代表的空格数
+set shiftwidth=4	" 使用缩进的空格数
+set tabstop=4		" 一个Tab代表的空格数
 set expandtab		" 在缩进时碰到Tab时用空格代替
 set cursorcolumn
 set splitright
@@ -60,11 +60,11 @@ nnoremap <Leader>ev <Esc>:vsplit $MYVIMRC<CR>
 nnoremap <Leader>sv <Esc>:source $MYVIMRC<CR>
 
 " () {} [] '' \"" 自动补全
-inoremap ( ()<Esc>i
-inoremap [ []<Esc>i
-inoremap { {}<Esc>i
-inoremap ' ''<Esc>i
-inoremap " ""<Esc>i
+" inoremap ( ()<Esc>i
+" inoremap [ []<Esc>i
+" inoremap { {}<Esc>i
+" inoremap ' ''<Esc>i
+" inoremap " ""<Esc>i
 
 " Python config
 augroup filetype_py
@@ -73,7 +73,7 @@ augroup END
 
 " javascript config
 augroup filetype_js
-	autocmd FileType javascript set shiftwidth=2
+	autocmd FileType javascript set shiftwidth=4
 augroup END
 
 " Status line
@@ -113,3 +113,11 @@ noremap > >gv
 " CtrlP plugin
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_map="<c-p>"
+
+" tmux env color conf
+if exists('$TMUX')
+  set term=screen-256color
+endif
+
+" set ejs file highlighting
+au BufNewFile,BufRead *.ejs set filetype=html
